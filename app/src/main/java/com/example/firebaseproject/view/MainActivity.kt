@@ -1,11 +1,11 @@
-package com.example.firebaseproject
+package com.example.firebaseproject.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Button
+import com.example.firebaseproject.R
+import com.example.firebaseproject.User
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
@@ -27,20 +27,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val intentToAnotherScreen = Intent (this, ActivityMovies::class.java)
-        startActivity(intentToAnotherScreen)
 
-//        database = Firebase.database.reference
-//
-//        val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().build())
-//
-//
-//        val signInIntent = AuthUI.getInstance()
-//            .createSignInIntentBuilder()
-//            .setAvailableProviders(providers)
-//            .build()
-//
-//        signInLauncher.launch(signInIntent)
+
+        database = Firebase.database.reference
+
+        val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().build())
+
+
+        val signInIntent = AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setAvailableProviders(providers)
+            .build()
+
+        signInLauncher.launch(signInIntent)
 
 
     }

@@ -1,18 +1,21 @@
-package com.example.firebaseproject
+package com.example.firebaseproject.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.firebaseproject.*
+import com.example.firebaseproject.viewmodel.MoviesViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 class ActivityMovies : AppCompatActivity() {
+    private lateinit var mViewModel: MoviesViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies)
@@ -27,6 +30,9 @@ class ActivityMovies : AppCompatActivity() {
 
         // ArrayList of class ItemsViewModel
         val data = ArrayList<ItemsViewModel>()
+
+        mViewModel = MoviesViewModel()
+        val result = mViewModel.getMovies()
 
         // This loop will create 20 Views containing
         // the image with the count of view
@@ -59,8 +65,10 @@ class ActivityMovies : AppCompatActivity() {
                 Log.d("myLog", "OnFailure ${t?.message}")
             }
 
-            override fun onItemClick(position: Int) {
-              Toast.makeText(this@ActivityMovies,"$position", Toast.LENGTH_SHORT).show()
+            override fun onItemClick(id: Int) {
+              val intent = Intent (this@ActivityMovies, MovieDetailsActivity::class.java)
+                intent.putExtra("id",id)
+                startActivity(intent)
             }
         })
     }
